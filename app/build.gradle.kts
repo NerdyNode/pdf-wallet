@@ -1,4 +1,4 @@
-﻿plugins {
+plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
@@ -56,9 +56,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     
-    // Compose
-    val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
-    implementation(composeBom)
+    // Compose BOM — do NOT use a local val; inline to avoid early resolution
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -66,15 +65,13 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     
     // Room
-    val roomVersion = rootProject.ext.get("room_version") as String
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
     
     // Hilt
-    val hiltVersion = rootProject.ext.get("hilt_version") as String
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // WorkManager
@@ -83,10 +80,8 @@ dependencies {
     ksp("androidx.hilt:hilt-compiler:1.1.0")
     
     // ML Kit
-    val mlkitVersion = rootProject.ext.get("mlkit_version") as String
-    val mlkitBarcodeVersion = rootProject.ext.get("mlkit_barcode_version") as String
-    implementation("com.google.mlkit:text-recognition:$mlkitVersion")
-    implementation("com.google.mlkit:barcode-scanning:$mlkitBarcodeVersion")
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
     
     // PdfBox
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
@@ -98,4 +93,9 @@ dependencies {
     implementation("net.zetetic:android-database-sqlcipher:4.5.4")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
     implementation("androidx.biometric:biometric:1.1.0")
+    
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
