@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
@@ -41,9 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
-    }
+    // composeOptions block removed: Kotlin 2.0+ uses the compose compiler Gradle plugin instead
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -70,14 +69,14 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
     
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.50")
-    ksp("com.google.dagger:hilt-android-compiler:2.50")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("com.google.dagger:hilt-android:2.53.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
-    implementation("androidx.hilt:hilt-work:1.1.0")
-    ksp("androidx.hilt:hilt-compiler:1.1.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
     
     // ML Kit
     implementation("com.google.mlkit:text-recognition:16.0.0")
